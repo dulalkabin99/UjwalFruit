@@ -1,6 +1,7 @@
 package com.example.ujwalfruit;
 
 
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,9 @@ public class HomeController {
     @Autowired
     FruitRepo fruitRepo;
 
+    @Autowired
+    CloudinaryConfig cloud;
+
 
 
     //Adding fruits and returning to the homepage
@@ -37,6 +41,14 @@ public class HomeController {
     public  String admin(Model model){
         return "adminpage";
     }
+
+    @GetMapping("/addnewfruit")
+    public  String addFruit(Model model){
+
+        model.addAttribute("fru", new Fruit());
+        return "addnewfruit";
+    }
+
 
     @GetMapping("/changefruit")
     public  String adminChangeFruit(Model model){
@@ -99,7 +111,7 @@ public class HomeController {
             return "/changefruit";
         }
         dayRepo.save(weekday);
-        return "/";
+        return "redirect:/";
 
     }
 
@@ -112,6 +124,32 @@ public class HomeController {
             return "/changehours";
         }
         dayRepo.save(weekday);
+        return "test";
+
+    }
+
+
+
+
+    @PostMapping("/processfruit")
+    public String processCarForm(@Valid @ModelAttribute("car") Fruit fruit,
+                                 BindingResult result, @RequestParam("file")MultipartFile file) {
+        if (result.hasErrors()) {
+            return "addnewfruit";
+        }
+        else if (file.isEmpty()) {
+            return "redirect:/addnewfruit";
+        }
+        try {
+            Map uploadResult = cloud.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+            fruit.setImageurl(uploadResult.get("url").toString());
+            fruitRepo.save(fruit);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/addnewfruit";
+
+        }
         return "test";
 
     }
