@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset=" UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+
+    <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+<div th:replace="base :: navlinks"></div>
+<div class="container bg">
+
+    <h2> Change Fruit for each day here</h2>
+    <form class="form-horizontal" action="#" th:action="@{/processhours}"
+          th:object="${da}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{day}"/>
+        <input type="hidden" th:field="*{fruit}"/>
+        <div class="row">
+            <div class="form-group">
+                <h2>
+                            <div class="row">
+                                <div class="form-group">
+                                        <tr th:each="op: ${da}">
+                                            <label> [[${op.day}]]:  </label><br/>
+                                    <div class="col-sm-8  col-md-7 ">
+                                        <input type="text" th:field= "*{hours}" class="form-control input-md" required=""/>
+                                        <span th:if="${#fields.hasErrors('hours')}" th:errors="*{hours}"></span><br/>
+                                    </div>
+                                    </div>
+                                </div>
+                </h2>
+            </div>
+        </div>
+
+        <button id="submit" name="submit" class="btn btn-success">Submit</button>
+    </form>
+    <div th:replace="base :: footer"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset=" UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+
+    <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+<div th:replace="base :: navlinks"></div>
+<div class="container bg">
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <h2><strong>[[${daily.day}]]</strong> </h2>
+            <img  th:src="${daily.fruit.imageurl}" alt="Fruit image"/>
+            <h3>[[${daily.fruit.name}]]</h3>
+        </div>
+
+
+        <div class="col-sm- col-md-5 desc">
+            <h4>Price: $2.99/LB </h4>
+
+            <div class="alert alert-warning" role="alert">
+                <p><strong>Hurry Up</strong> Fruits are ripe and perfect to pick</p>
+            </div>
+            <button type="button" class="btn btn-success"><a href="/"> View all Fruits</a></button>
+        </div>
+
+    </div>
+
+
+    <div th:replace="base :: footer"></div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<h2> Welcome, Add New fruit Here,</h2>
+<form class="form-horizontal" action="#" th:action="@{/Processfruit}"
+      th:object="${fruit}"  method="post">
+
+    <input type="hidden" th:field="*{id}"/><br/>
+
+    New Fruit Name <input type="text" th:field="*{company}" class="form-control input-md" required/>
+    <span th:if="${#fields.hasErrors('company')}" th:errors="*{company}"></span><br/>
+
+    Image <input type="file">
+
+
+    <button id="submit" name="submit" class="btn btn-success">Submit</button>
+
+
+</form>
+
+
+
+</body>
+</html>
