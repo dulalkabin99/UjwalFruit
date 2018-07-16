@@ -20,16 +20,16 @@
 <div class="container bg">
 
     <div th:each="d : ${days}">
-       <li> <h2 th:text="${d.day}"></h2> [[${d.fruit.name}]]
+       <li> <h2 th:text="${d.day}"></h2> [[${d.fruit.name}]]-  [[${d.hours}]]
 
 <!--
         <button type="button" class="btn btn-success"><a th:href="@{/update/{id} (id=${d.id})}"> Update &nbsp;</a></button>
 -->
 
         <button type="button" class="btn btn-success"> <a th:href="@{/detail/{id} (id=${d.id})}"> View </a></button>
+
        </li>
     </div>
-
 
     <div th:replace="base :: footer"></div>
 </div>
